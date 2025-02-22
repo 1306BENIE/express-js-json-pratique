@@ -1,11 +1,1 @@
-[
-    {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "age": 30
-    }
-]
-
-
-
+[{"id":1,"name":"N'Zian Kouabran Anderson","email":"john.doe@example.com","age":30},{"id":2,"name":"BENIE SYLVESTRE","email":"sylvestrebenie7829@gmail.com","age":23}]

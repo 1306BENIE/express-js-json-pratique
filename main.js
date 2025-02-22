@@ -43,25 +43,29 @@ app.get('/tasks/:id', (req, res) => {
 
 // Mettre a jour un nouvel utilisateur
 
-app.put('/tasks/:id', (req, res) => {
+app.put("/tasks/:id", (req, res) => {
   const data = readData();
   const taskID = parseInt(req.params.id);
-  const taskIndex = data.findIndex(item => item.id === taskID);
+  const taskIndex = data.findIndex((item) => item.id === taskID);
 
-  if (taskIndex === -1){
-    res.status(404).send("Task not found");
-    return;
+  if (taskIndex === -1) {
+    return res.status(404).json({ message: "Item non trouvé" });
   }
 
-  data[taskIndex] = {...data[taskIndex], ...req.body}
+  if (
+  typeof req.body.complete !== "boolean") {
+    res.status(400).json({ message: "entrez une valeur booleen" });
+  } 
+  
+  data[taskIndex] = {...data[taskIndex], complete: req.body.complete };
+    
   writeData(data);
 
-  res.status(200).json(data[taskIndex]);
-}); 
-
+  res.status(200).json(data[taskIndex]); 
+});
 // Ajouter un nouvel utilisateur
 
-app.post('/tasks/', (req, res) => {
+app.post('/tasks', (req, res) => {
   const data = readData();
   const newTask = {id: data.length + 1, ...req.body};
   data.push(newTask);
